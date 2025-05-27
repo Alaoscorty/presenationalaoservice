@@ -102,3 +102,46 @@ cartItemsList.addEventListener('click', function(e) {
 cartModal.addEventListener('click', function(e) {
     if (e.target === cartModal) cartModal.classList.add('hidden');
 });
+
+//script qui gère le formulaire de contact
+
+document.querySelector('form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    // Récupérer les valeurs du formulaire
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const service = document.getElementById('service').value.trim();
+    const message = document.getElementById('message').value.trim();
+    // Validation simple
+    if (!name || !email || !phone || !service || !message) {
+        alert('Veuillez remplir tous les champs.');
+        return;
+    }
+    // Envoi via EmailJS (nécessite une configuration préalable)
+    try {
+        // Remplacez les valeurs ci-dessous par vos propres identifiants EmailJS
+        await emailjs.send('service_5p2ulks', 'template_I1ap51g', {
+            from_name: name,
+            from_email: email,
+            phone: phone,
+            service: service,
+            message: message,
+            to_email: 'alaoservice1@gmail.com'
+        }, 'g8rOLtHKKY-UIQXqeBedu');
+        document.getElementById('contact-success').classList.remove('hidden');
+        this.reset();
+    } catch (err) {
+        // Afficher l'erreur dans une div
+        let errorDiv = document.getElementById('contact-error');
+        if (!errorDiv) {
+            errorDiv = document.createElement('div');
+            errorDiv.id = 'contact-error';
+            errorDiv.className = 'mt-6 flex items-center justify-center text-red-600';
+            errorDiv.innerHTML = '<i class="fas fa-times-circle text-2xl mr-2"></i><span class="font-semibold">Erreur lors de l\'envoi. Veuillez réessayer.</span>';
+            this.parentNode.appendChild(errorDiv);
+        } else {
+            errorDiv.classList.remove('hidden');
+        }
+    }
+});
