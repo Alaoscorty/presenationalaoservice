@@ -29,4 +29,9 @@ document.querySelector('form').addEventListener('submit', async function (e) {
         alert('Erreur réseau.');
     }
 });
-
+//code qui gère la carte produit
+document.getElementById('show-products-btn').addEventListener('click', function(e) {
+  e.preventDefault();
+  document.getElementById('hidden-products').classList.toggle('hidden');
+  this.classList.add('hidden');
+});
