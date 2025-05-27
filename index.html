@@ -281,7 +281,18 @@
                             <span>Total :</span>
                             <span id="cart-total">0 FCFA</span>
                         </div>
-                        <button class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-4 rounded transition duration-300">Valider la commande</button>
+                        <button id="validate-order" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-4 rounded transition duration-300 flex items-center justify-center">
+                            <span id="validate-order-text">Valider la commande</span>
+                            <span id="validate-order-spinner" class="ml-2 hidden">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                <span class="ml-1">Envoi en cours...</span>
+                            </span>
+                        </button>
+                        <div id="order-success" class="hidden mt-4 flex items-center justify-center text-green-600">
+                            <i class="fas fa-check-circle text-2xl mr-2"></i>
+                            <span class="font-semibold">Votre commande a été validée avec succès !</span>
+                        </div>
+                        
                     </div>
                 </div>
                 
@@ -296,7 +307,7 @@
             <div class="max-w-3xl mx-auto text-center">
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Notre Histoire</h2>
                 <div class="w-20 h-1 bg-amber-600 mx-auto mb-8"></div>
-                <p class="text-gray-200 mb-6">Fondée en 2015 par Aude Ahonon, passionnée par les soins naturels et la beauté authentique, Chez Ahonon Vernis s'est imposée comme une référence dans le domaine des cosmétiques naturels en Afrique de l'Ouest.</p>
+                <p class="text-gray-200 mb-6">Fondée en 2015 parAhonon Vernis, passionnée par les soins naturels et la beauté authentique, Chez Ahonon Vernis s'est imposée comme une référence dans le domaine des cosmétiques et de l'esthétiques naturels en Afrique de l'Ouest.</p>
                 <p class="text-gray-200 mb-8">Notre philosophie : allier tradition et innovation pour offrir des produits qui respectent votre peau et l'environnement, tout en vous apportant des résultats visibles.</p>
                 <a href="#contact" class="bg-transparent hover:bg-amber-600 text-white font-bold py-3 px-8 rounded-full border-2 border-white hover:border-amber-600 transition duration-300">Nous Contacter</a>
             </div>
@@ -368,6 +379,90 @@
                         </div>
                     </div>
                     <p class="text-gray-600">"Service impeccable et produits de qualité. Ma femme est ravie de ses cadeaux d'anniversaire venant de chez eux."</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-quote-left text-amber-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Clarisse M.</h4>
+                            <div class="flex text-amber-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Accueil chaleureux et conseils personnalisés. J'ai adoré le soin du visage, ma peau est éclatante !"</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-quote-left text-amber-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Mariam S.</h4>
+                            <div class="flex text-amber-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Les extensions de cils sont superbes et tiennent longtemps. Je recommande vivement ce salon."</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-quote-left text-amber-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Paul A.</h4>
+                            <div class="flex text-amber-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Très satisfait du service et des produits naturels. Je reviendrai sans hésiter pour d'autres soins."</p>
+                </div>
+                <!-- Formulaire d'ajout d'avis -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-sm md:col-span-3">
+                    <h4 class="text-xl font-semibold mb-4">Laissez votre avis</h4>
+                    <form id="testimonial-form" class="space-y-4">
+                        <div>
+                            <label for="testimonial-name" class="block text-gray-700 font-medium mb-1">Nom</label>
+                            <input type="text" id="testimonial-name" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-amber-500" required>
+                        </div>
+                        <div>
+                            <label for="testimonial-rating" class="block text-gray-700 font-medium mb-1">Note</label>
+                            <select id="testimonial-rating" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-amber-500" required>
+                                <option value="">Sélectionnez une note</option>
+                                <option value="5">★★★★★ (5)</option>
+                                <option value="4">★★★★☆ (4)</option>
+                                <option value="3">★★★☆☆ (3)</option>
+                                <option value="2">★★☆☆☆ (2)</option>
+                                <option value="1">★☆☆☆☆ (1)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="testimonial-message" class="block text-gray-700 font-medium mb-1">Votre avis</label>
+                            <textarea id="testimonial-message" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-amber-500" required></textarea>
+                        </div>
+                        <button type="submit" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-6 rounded transition duration-300">Envoyer</button>
+                        <div id="testimonial-success" class="hidden mt-2 text-green-600 flex items-center bg-green-100 border border-green-300 rounded px-4 py-2"></div>
+                            <i class="fas fa-check-circle mr-2"></i>
+                            <span>Merci pour votre avis !</span>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

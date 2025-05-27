@@ -145,3 +145,76 @@ document.querySelector('form').addEventListener('submit', async function(e) {
         }
     }
 });
+//script qui permet de gérer la gestion de l'envoie du formulaire
+document.getElementById('validate-order').addEventListener('click', function() {
+    var spinner = document.getElementById('validate-order-spinner');
+    var btnText = document.getElementById('validate-order-text');
+    spinner.classList.remove('hidden');
+    btnText.classList.add('opacity-50');
+}, { once: true });
+
+//script qui permet de gérer l'envoie de la carte de produit de l'utilisateur
+
+document.getElementById('validate-order').addEventListener('click', function() {
+    // Récupérer les produits du panier
+    const items = Array.from(document.querySelectorAll('#cart-items li')).map(li => li.textContent.trim()).join(', ');
+    const total = document.getElementById('cart-total').textContent.trim();
+
+    // Envoyer l'email via EmailJS
+    emailjs.send('default_service', 'template_7v1zj2r', {
+        message: `Nouvel utilisateur a passé commande : ${items}. Prix total : ${total}`
+    }).then(function() {
+        // Afficher la notification de succès
+        document.getElementById('order-success').classList.remove('hidden');
+        setTimeout(() => {
+            document.getElementById('order-success').classList.add('hidden');
+            document.getElementById('cart-modal').classList.add('hidden');
+        }, 2500);
+    });
+});
+
+//script qui permet de simuler un avis
+
+document.getElementById('testimonial-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('testimonial-name').value.trim();
+    const rating = parseInt(document.getElementById('testimonial-rating').value, 10);
+    const message = document.getElementById('testimonial-message').value.trim();
+    if (!name || !rating || !message) return;
+
+    // Création des étoiles
+    let stars = '';
+    for (let i = 1; i <= 5; i++) {
+        stars += `<i class="fas fa-star${i <= rating ? ' text-amber-400' : ' text-gray-300'}"></i>`;
+    }
+
+    // Création du bloc d'avis
+    const testimonialHTML = `
+        <div class="bg-gray-50 p-8 rounded-lg shadow-sm">
+            <div class="flex items-center mb-4">
+                <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mr-4">
+                    <i class="fas fa-quote-left text-amber-600"></i>
+                </div>
+                <div>
+                    <h4 class="font-semibold">${name}</h4>
+                    <div class="flex">${stars}</div>
+                </div>
+            </div>
+            <p class="text-gray-600">"${message}"</p>
+        </div>
+    `;
+
+    // Ajout de l'avis en haut de la liste
+    const grid = e.target.closest('.grid');
+    if (grid) {
+        grid.insertAdjacentHTML('afterbegin', testimonialHTML);
+    }
+
+    // Réinitialisation du formulaire et affichage du message de succès
+    e.target.reset();
+    document.getElementById('testimonial-success').classList.remove('hidden');
+    setTimeout(() => {
+        document.getElementById('testimonial-success').classList.add('hidden');
+    }, 3000);
+});
+
