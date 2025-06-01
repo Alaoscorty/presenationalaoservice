@@ -541,25 +541,25 @@
                     </div>
                     
                     <div class="md:w-1/2 p-10">
-                        <form>
+                        <form id="whatsapp-contact-form">
                             <div class="mb-6">
                                 <label for="name" class="block text-gray-700 font-medium mb-2">Nom Complet</label>
-                                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-amber-500">
+                                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-amber-500" required>
                             </div>
                             
                             <div class="mb-6">
                                 <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
-                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-amber-500">
+                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-amber-500" required>
                             </div>
                             
                             <div class="mb-6">
                                 <label for="phone" class="block text-gray-700 font-medium mb-2">Téléphone</label>
-                                <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-amber-500">
+                                <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-amber-500" required>
                             </div>
                             
                             <div class="mb-6">
                                 <label for="service" class="block text-gray-700 font-medium mb-2">Service</label>
-                                <select id="service" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-amber-500">
+                                <select id="service" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-amber-500" required>
                                     <option value="">Sélectionnez un service</option>
                                     <option value="manucure">Manucure</option>
                                     <option value="soin-visage">Soin du visage</option>
@@ -570,7 +570,7 @@
                             
                             <div class="mb-6">
                                 <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
-                                <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-amber-500"></textarea>
+                                <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-amber-500" required></textarea>
                             </div>
                             
                             <button type="submit" id="contact-submit" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-4 rounded transition duration-300 flex items-center justify-center">
@@ -580,11 +580,23 @@
                                 <i class="fas fa-check-circle text-2xl mr-2"></i>
                                 <span class="font-semibold">Votre envoi a été fait avec succès</span>
                             </div>
-                            
-                            
-                            <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-                            <script>emailjs.init('g8rOLtHKKY-UIQXqeBedu');</script>
                         </form>
+                        <script>
+                        document.getElementById('whatsapp-contact-form').addEventListener('submit', function(e) {
+                            e.preventDefault();
+                            var name = document.getElementById('name').value.trim();
+                            var email = document.getElementById('email').value.trim();
+                            var phone = document.getElementById('phone').value.trim();
+                            var service = document.getElementById('service').value;
+                            var message = document.getElementById('message').value.trim();
+
+                            var text = `Bonjour, je souhaite prendre rendez-vous.\n\nNom: ${name}\nEmail: ${email}\nTéléphone: ${phone}\nService: ${service}\nMessage: ${message}`;
+                            var url = "https://wa.me/22994516481?text=" + encodeURIComponent(text);
+
+                            window.open(url, '_blank');
+                            document.getElementById('contact-success').classList.remove('hidden');
+                        });
+                        </script>
                     </div>
                 </div>
             </div>
@@ -628,14 +640,24 @@
                 </div>
                 
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">Newsletter</h3>
-                    <p class="text-gray-400 mb-4">Abonnez-vous pour recevoir nos offres spéciales et conseils beauté.</p>
-                    <form class="flex">
-                        <input type="email" placeholder="Votre email" class="px-4 py-2 w-full rounded-l focus:outline-none text-gray-800">
+                    <h3 class="text-lg font-semibold mb-4">Rejoignez notre groupe WhatsApp</h3>
+                    <p class="text-gray-400 mb-4">Entrez votre numéro pour recevoir nos offres et conseils beauté sur WhatsApp.</p>
+                    <form class="flex" id="whatsapp-group-form">
+                        <input type="tel" id="whatsapp-number" placeholder="Votre numéro (ex: 229XXXXXXXX)" class="px-4 py-2 w-full rounded-l focus:outline-none text-gray-800" required>
                         <button type="submit" class="bg-amber-600 hover:bg-amber-700 px-4 py-2 rounded-r">
-                            <i class="fas fa-paper-plane"></i>
+                            <i class="fab fa-whatsapp"></i>
                         </button>
                     </form>
+                    <script>
+                        document.getElementById('whatsapp-group-form').addEventListener('submit', function(e) {
+                            e.preventDefault();
+                            var number = document.getElementById('whatsapp-number').value.trim();
+                            if (number) {
+                                var groupLink = "https://chat.whatsapp.com/I8GTvwRGSUjAqHcqouuSlA"; // Remplacez par le lien de votre groupe
+                                window.open(groupLink, '_blank');
+                            }
+                        });
+                    </script>
                 </div>
             </div>
             
